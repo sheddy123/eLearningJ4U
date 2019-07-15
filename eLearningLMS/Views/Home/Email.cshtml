@@ -1,0 +1,153 @@
+﻿@model eLearningLMS.Models.Support
+@using eLearningLMS.Extensions
+@{
+                /**/
+
+                ViewBag.Title = "UploadFile";
+                Layout = "~/Views/Shared/_Email.cshtml";
+}
+@if (Request.IsAuthenticated @*&& User.IsInRole("Instructor")*@)
+{
+    <!-- begin #sidebar -->
+    <div id="sidebar" class="sidebar">
+        <!-- begin sidebar scrollbar -->
+        <div data-scrollbar="true" data-height="100%">
+            <!-- begin sidebar user -->
+            <ul class="nav">
+                <li class="nav-profile">
+                    <div class="image">
+                        <a href="javascript:;">
+                            <img src="@Url.Action("UserPhotos", "Home")" alt="User Image"
+                                 style=" width: 40px; height: 40px;
+                                " />
+                        </a>
+
+                    </div>
+                    <div class="info">
+                        @User.Identity.GetUserFirstName()
+                        <span aria-label="Active now" style="background: rgb(66, 183, 42); border-radius: 50%; display: inline-block; height: 6px; width: 6px;"></span> <small>Instructor</small>
+                    </div>
+                </li>
+            </ul>
+            <!-- end sidebar user -->
+            <!-- begin sidebar nav -->
+            <ul class="nav">
+                <li class="nav-header">Navigation</li>
+                <li class="has-sub active">
+                    <a href="javascript:;">
+                        @*<b class="caret pull-right"></b>*@
+                        <i class="fa fa-laptop"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    @*<ul class="sub-menu">
+                            <li class="active"><a href="index.html">Dashboard v1</a></li>
+                            <li><a href="index_v2.html">Dashboard v2</a></li>
+                        </ul>*@
+                </li>
+                <li class="has-sub">
+                    <a href="~/Instructors/Index">
+                        <span class="badge pull-right">10</span>
+                        <i class="fa fa-user"></i>
+                        <span>Instructor</span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="~/Support/UploadFile">
+
+                        <i class="fa fa-upload"></i>
+                        <span>Upload Course</span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="~/Home/Email">
+                        <i class="fa fa-inbox"></i>
+                        <span>Send Email</span>
+                    </a>
+                </li>
+                <li><a href="~/Home/Calendar"><i class="fa fa-calendar"></i> <span>Calendar</span></a></li>
+
+                <li class="has-sub">
+                    <a href="~/Account/Login">
+                        @*<b class="caret pull-right"></b>*@
+                        <i class="fa fa-key"></i>
+                        <span>Login</span>
+                    </a>
+
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;">
+                        @*<b class="caret pull-right"></b>*@
+                        <i class="fa fa-cubes"></i>
+                        <span>Version <span class="label label-theme m-l-5">NEW</span></span>
+                    </a>
+
+                </li>
+
+                <!-- begin sidebar minify button -->
+                <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+                <!-- end sidebar minify button -->
+            </ul>
+            <!-- end sidebar nav -->
+        </div>
+        <!-- end sidebar scrollbar -->
+    </div>
+    <!-- begin #content -->
+    <!-- begin #content -->
+    <div id="content" class="content content-full-width">
+      
+            <!-- begin vertical-box -->
+            <div class="vertical-box">
+                <!-- begin vertical-box-column -->
+                <div class="vertical-box-column">
+                    <div class="col-md-10">
+                        
+                                <!-- begin wrapper -->
+                                <div class="wrapper">
+                                    <div class="p-30 bg-white">
+                                        <!-- begin email form -->
+                                        <form action="/" method="POST" name="email_to_form">
+                                            <!-- begin email to -->
+                                            <label class="control-label">To:</label>
+                                            <div class="m-b-15">
+                                                <ul id="email-to" class="inverse">
+                                                    @*<li>bootstrap@gmail.com</li>
+                                                    <li>google@gmail.com</li>*@
+                                                </ul>
+                                            </div>
+                                            <!-- end email to -->
+                                            <!-- begin email subject -->
+                                            <label class="control-label">Subject:</label>
+                                            <div class="m-b-15">
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                            <!-- end email subject -->
+                                            <!-- begin email content -->
+                                            <label class="control-label">Content:</label>
+                                            <div class="m-b-15">
+                                                <textarea class="textarea form-control" id="wysihtml5" placeholder="Enter text ..." rows="12"></textarea>
+                                            </div>
+                                            <!-- end email content -->
+                                            <button type="submit" class="btn btn-primary p-l-40 p-r-40">Send</button>
+                                        </form>
+                                        <!-- end email form -->
+                                    </div>
+                                </div>
+                                <!-- end wrapper -->
+
+
+
+
+                    </div>
+                    <!-- end col-10 -->
+                </div>
+                <!-- end row -->
+            </div>
+        </div>
+        <!-- end #content -->
+        }
+
+        @section Scripts {
+            <script src="~/Scripts/jquery.validate.min.js"></script>
+            <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        }
+

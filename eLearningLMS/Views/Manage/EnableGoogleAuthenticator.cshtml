@@ -1,0 +1,34 @@
+﻿@model eLearningLMS.Models.GoogleAuthenticatorViewModel
+
+<div class="row">
+    <div class="col-md-8">
+        <h3>1\. Add MySuperApplication to Google Authenticator</h3>
+        <p>Open Google Authenticator and add MySuperApplication by scanning the QR Code to the right.</p>
+        <h3>2\. Enter the 6 digit code that Google Authenticator generates</h3>
+        <p>
+            Verify that MySuperApplication is added correctly in Google Authenticator by entering the 6 digit code which
+            Google Authenticator generates for MySuperApplication below, and then click Enable.
+        </p>
+        @using (Html.BeginForm("EnableGoogleAuthenticator", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false)
+            @Html.HiddenFor(m => m.SecretKey)
+            @Html.HiddenFor(m => m.BarcodeUrl)
+            <div class="form-group">
+                @Html.LabelFor(m => m.Codes, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Codes, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Enable" />
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-4">
+        <img src="http://qrcode.kaywa.com/img.php?s=4&d=@(Model.BarcodeUrl)" />
+    </div>
+</div>

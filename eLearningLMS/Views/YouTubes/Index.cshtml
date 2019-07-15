@@ -1,0 +1,234 @@
+﻿@model IEnumerable<eLearningLMS.Models.YouTube>
+@using eLearningLMS.Extensions
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_YouTubePartial.cshtml";
+}
+
+@if (Request.IsAuthenticated && User.IsInRole("Student"))
+{
+    <!-- begin #sidebar -->
+    <div id="sidebar" class="sidebar">
+        <!-- begin sidebar scrollbar -->
+        <div data-scrollbar="true" data-height="100%">
+            <!-- begin sidebar user -->
+            <ul class="nav">
+                <li class="nav-profile">
+                    <div class="image">
+                        <a href="javascript:;">
+                            <img src="@Url.Action("UserPhotos", "Home")" alt="User Image"
+                                 style=" width: 40px; height: 40px;
+                                " />
+                        </a>
+
+                    </div>
+                    <div class="info">
+                        @User.Identity.GetUserFirstName()
+                        <span aria-label="Active now" style="background: rgb(66, 183, 42); border-radius: 50%; display: inline-block; height: 6px; width: 6px;"></span> <small>Student</small>
+                    </div>
+                </li>
+            </ul>
+            <!-- end sidebar user -->
+            <!-- begin sidebar nav -->
+            <ul class="nav">
+                <li class="nav-header">Navigation</li>
+                <li class="has-sub active">
+                    <a href="javascript:;">
+                        @*<b class="caret pull-right"></b>*@
+                        <i class="fa fa-laptop"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    @*<ul class="sub-menu">
+                            <li class="active"><a href="index.html">Dashboard v1</a></li>
+                            <li><a href="index_v2.html">Dashboard v2</a></li>
+                        </ul>*@
+                </li>
+                <li class="has-sub">
+                    <a href="~/Enrollments/Index">
+                        <span class="badge pull-right">10</span>
+                        <i class="fa fa-inbox"></i>
+                        <span>Enrollments</span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="~/Support">
+                        @*<b class="caret pull-right"></b>*@
+                        <i class="fa fa-book"></i>
+                        <span>Download Courses<span class="label label-theme m-l-5">NEW</span></span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="~/Home/QuizIndex">
+                        @*<b class="caret pull-right"></b>*@
+                        <i class="fa fa-pencil-square-o"></i>
+                        <span>Attempt Quiz</span>
+                    </a>
+                </li>
+                <li><a href="~/Home/Calendar"><i class="fa fa-calendar"></i> <span>Calendar</span></a></li>
+                <li class="has-sub">
+                    <a href="javascript:document.getElementById('logoutForm').submit()">
+                        <b class="caret pull-right"></b>
+                        <i class="fa fa-key"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;">
+                        <b class="caret pull-right"></b>
+                        <i class="fa fa-cubes"></i>
+                        <span>Version <span class="label label-theme m-l-5">NEW</span></span>
+                    </a>
+                    @*<ul class="sub-menu">
+                        <li><a href="javascript:;">HTML</a></li>
+                        <li><a href="../template_content_ajax/index.html">AJAX</a></li>
+                        <li><a href="../template_content_angularjs/index.html">ANGULAR JS</a></li>
+                        <li><a href="../template_content_angularjs2/index.html">ANGULAR JS 2 <i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                        <li><a href="../template_content_material/index.html">MATERIAL DESIGN</a></li>
+                    </ul>*@
+                </li>
+
+                <!-- begin sidebar minify button -->
+                <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+                <!-- end sidebar minify button -->
+            </ul>
+            <!-- end sidebar nav -->
+        </div>
+        <!-- end sidebar scrollbar -->
+    </div>
+
+
+
+    <!-- begin #content -->
+    <div id="content" class="content">
+        <!-- begin breadcrumb -->
+        <ol class="breadcrumb pull-right">
+            <li><a href="javascript:;">Home</a></li>
+            <li class="active">Gallery</li>
+        </ol>
+        <!-- end breadcrumb -->
+        <!-- begin page-header -->
+        <h1 class="page-header">Gallery <small>header small text goes here...</small></h1>
+        <!-- end page-header -->
+        <div id="options" class="m-b-10">
+            <span class="gallery-option-set" id="filter" data-option-key="filter">
+                <a href="#show-all" class="btn btn-default btn-xs active" data-option-value="*">
+                    Show All
+                </a>
+                <a href="#gallery-group-1" class="btn btn-default btn-xs" data-option-value=".gallery-group-1">
+                    Gallery Group 1
+                </a>
+                <a href="#gallery-group-2" class="btn btn-default btn-xs" data-option-value=".gallery-group-2">
+                    Gallery Group 2
+                </a>
+                <a href="#gallery-group-3" class="btn btn-default btn-xs" data-option-value=".gallery-group-3">
+                    Gallery Group 3
+                </a>
+                <a href="#gallery-group-4" class="btn btn-default btn-xs" data-option-value=".gallery-group-4">
+                    Gallery Group 4
+                </a>
+            </span>
+        </div>
+        @foreach (var item in Model)
+        {
+            @*<tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.CourseCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Instructor.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <iframe width="20%" height="70%" src="//www.youtube.com/embed/@item.Link" frameborder="0" allowfullscreen></iframe>
+                    @Html.DisplayFor(modelItem => item.Link)
+                </td>*@
+                <div id="gallery" class="gallery">
+                    <div class="image">
+                        <div class="image-inner">
+                            <a href="assets/img/gallery/gallery-1.jpg" data-lightbox="gallery-group-1">
+                                <iframe width="100%" height="100%" src="//www.youtube.com/embed/@item.Link" frameborder="0" allowfullscreen></iframe>
+                            </a>
+                            <p class="image-caption">
+                                @Html.DisplayFor(modelItem => item.Course.CourseCode)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                }
+        </div>
+    <!-- end #content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Course.CourseCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Instructor.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Link)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.CourseCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Instructor.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <iframe width="20%" height="70%" src="//www.youtube.com/embed/@item.Link" frameborder="0" allowfullscreen></iframe>
+                    @Html.DisplayFor(modelItem => item.Link)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+
+
+}
+
+
+
+
+

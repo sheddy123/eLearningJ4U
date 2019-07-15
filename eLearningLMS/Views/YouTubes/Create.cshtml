@@ -1,0 +1,117 @@
+﻿@model eLearningLMS.Models.YouTube
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>YouTube</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @if(@ViewBag.Link != null)
+        {
+            @ViewBag.Link
+        }
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Link, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Instructor Name</label>
+
+            <div class="col-md-10">
+                @Html.DropDownList("InstructorId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.InstructorId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Course Code</label>
+            <div class="col-md-10">
+                @Html.DropDownList("CourseId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Course.CourseCode)
+            </th>
+            <th>
+               Instructor
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Link)
+            </th>
+
+            <th></th>
+        </tr>
+        @if (ViewBag.YouTube == null)
+        {
+
+        }
+        else
+        {
+            foreach (var item in ViewBag.YouTube)
+            {
+            <tr>
+                <td>
+                    @item.Course.CourseCode
+                </td>
+                <td>
+                    @item.Instructor.FirstName
+                </td>
+                <td>
+                     @item.Name
+                </td>
+                <td>
+                    <iframe width="20%" height="70%" src="//www.youtube.com/embed/@item.Link" frameborder="0" allowfullscreen></iframe>
+                    @*@Html.DisplayFor(modelItem => @item.Link)*@
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = @item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { @id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = @item.Id })
+                </td>
+            </tr>
+            }
+        }
+
+    </table>
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

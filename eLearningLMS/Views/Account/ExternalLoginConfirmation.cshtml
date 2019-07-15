@@ -1,0 +1,109 @@
+﻿@model eLearningLMS.Models.ExternalLoginConfirmationViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LoginRegister.cshtml";
+}
+
+<!-- begin register -->
+<div class="register register-with-news-feed">
+    <!-- begin news-feed -->
+    <div class="news-feed">
+        <div class="news-image">
+            <img src="~/Content/assets/img/login-bg/bg-5.jpg" alt="" />
+        </div>
+        <div class="news-caption">
+            <h4 class="caption-title"><i class="fa fa-edit text-success"></i>  Learning Just for You</h4>
+            <p>
+                Education is the passport to the future, for tomorrow belongs to those who
+                <a href="#">prepare for it</a> today.<br />
+                Live as if you were to die tomorrow. Learn as if you were to live forever
+                <a href="#">Mahatma Gandhi</a><br />
+                Develop a passion for learning. If you do, you will never cease to grow
+                <a href="#">Anthony J. D'Angelo</a><br />
+                Education is what remains after one has forgotten what one has learned in school
+                <a href="#">Albert Einstein</a>
+            </p>
+        </div>
+    </div>
+    <!-- end news-feed -->
+    <!-- begin right-content -->
+    <div class="right-content">
+
+        <!-- end register-header -->
+        <!-- begin register-content -->
+        <div class="register-content">
+            @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "margin-bottom-0", role = "form", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <h2>@ViewBag.Title.</h2>
+                <h3>Associate your @ViewBag.LoginProvider account.</h3>
+
+                <h4>Association Form</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <p class="text-info">
+                    You've successfully authenticated with <strong>@ViewBag.LoginProvider</strong>.
+                    Please enter a user name for this site below and click the Register button to finish
+                    logging in.
+                </p>
+
+                <label class="control-label" for="FirstName">First Name <span class="text-danger">*</span></label>
+                <div class="row row-space-10">
+                    <div class="col-md-6 m-b-15">
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6 m-b-15">
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <label class="control-label" for="Email">Email <span class="text-danger">*</span></label>
+                <div class="row m-b-15">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email address" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <label class="control-label" for="ProfileImage">Upload Image <i class="fa fa-plus"></i></label>
+                <div class="row m-b-15">
+                    <div class="col-md-12">
+                        <input type="file" required name="ProfileImage" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />
+                    </div>
+                </div>
+                <label class="control-label" for="UserRoles">User Role <span class="text-danger">*</span></label>
+                <div class="row m-b-15">
+                    <div class="col-md-12">
+                        @Html.DropDownList("UserRoles", (SelectList)ViewBag.Name, " ", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.UserRoles, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="checkbox m-b-30">
+                    <label>
+                        <input type="checkbox" required /> By clicking Sign Up, you agree to our <a href="#">Terms</a> and that you have read our <a href="#">Data Policy</a>, including our <a href="#">Cookie Use</a>.
+                    </label>
+                </div>
+                <div class="register-buttons">
+                    <input type="submit" class="btn btn-primary btn-block btn-lg" value="Register" />
+                </div>
+                <div class="m-t-20 m-b-40 p-b-40 text-inverse">
+                    Already a member? Click <a href="~/Account/Login">here</a> to login.
+                </div>
+                <hr />
+                <p class="text-center">
+                    &copy; @DateTime.Now.Year <br />
+                </p>
+
+            }
+        </div>
+        <!-- end register-content -->
+    </div>
+    <!-- end right-content -->
+</div>
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

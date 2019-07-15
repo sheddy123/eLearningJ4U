@@ -1,0 +1,33 @@
+﻿@model eLearningLMS.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+<h4>Use another service to log in.</h4>
+<hr />
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0) {
+        <div>
+            <p>
+                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                for details on setting up this ASP.NET application to support logging in via external services.
+            </p>
+        </div>
+    }
+    else {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post)) {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <p>
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        <button type="submit" style="color: #fff;
+            background-color: #dd4b39;
+            border-color: rgba(0,0,0,0.2);"   class="btn btn-social btn-google" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><span class="fa fa-google"></span>  Sign in with @p.AuthenticationType</button>
+                        @*<button type="submit" class="btn width-250 btn-social btn-google" style="background-color:#DD4B39; font-size:16px; color:white; " id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><span class="fa fa-google" style="border-right: 1px solid rgba(0,0,0,0.2);"></span>  Sign in with @p.AuthenticationType</button>*@
+                        
+                    }
+                </p>
+            </div>
+        }
+    }
+}

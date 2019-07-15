@@ -1,0 +1,268 @@
+﻿@model eLearningLMS.Models.Student
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+<div class="modal-dialog" id="ModalPopUp">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h4 class="modal-title" id="myModalLabel">@ViewBag.Message</h4>
+            
+        </div>
+
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal", @id = "ModalForm" }))
+
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="modal-body">
+
+                <div class="form-horizontal" style="padding-bottom:5px">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.FirstName, @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.MatriculationNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MatriculationNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.LastName, @readonly = "@readonly" } })
+                            @Html.ValidationMessageFor(model => model.MatriculationNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MatriculationNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.MatriculationNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MatriculationNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3" for="DepartmentID">Department</label>
+                        @*@Html.LabelFor(model => model.InstructorID, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-9">
+                            @Html.DropDownList("DepartmentID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3" for="ProgrammeID">Programme</label>
+                        @*@Html.LabelFor(model => model.InstructorID, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-9">
+                            @Html.DropDownList("ProgrammeID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ProgrammeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        @Html.LabelFor(model => model.level, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                        <div class="col-md-9">
+
+                            @Html.DropDownListFor(model => model.level, (SelectList)ViewBag.LevelList, "--Select Level--", htmlAttributes: new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.level, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        @Html.LabelFor(model => model.MaritalStat, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                        <div class="col-md-9">
+
+                            @Html.EnumDropDownListFor(model => model.MaritalStat, htmlAttributes: new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.MaritalStat, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        @Html.LabelFor(model => model.Genderr, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                        <div class="col-md-9">
+
+                            @Html.EnumDropDownListFor(model => model.Genderr, htmlAttributes: new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.Genderr, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        @Html.LabelFor(model => model.Religions, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                        <div class="col-md-9">
+
+                            @Html.EnumDropDownListFor(model => model.Religions, htmlAttributes: new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.Religions, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                         
+                            @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", @id = "datepicker-default", @placeholder = "Select Date" } })
+                            @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                        <div class="col-md-9">
+
+                            @Html.TextBoxFor(model => model.Nationality, "", new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.Nationality, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        @Html.LabelFor(model => model.StateOfOrigin, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                        <div class="col-md-9">
+
+                            @Html.TextBoxFor(model => model.StateOfOrigin, "", new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.StateOfOrigin, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        @Html.LabelFor(model => model.LGA, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                        <div class="col-md-9">
+
+                            @Html.TextBoxFor(model => model.LGA, "", new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.LGA, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-footer" style="padding:5px">
+
+                        <div class="form-group">
+
+                            <div class="col-md-offset-2 col-md-10">
+
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                <input type="submit" class="btn btn-primary" id="confirmok1" value="Save changes" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        }
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('.btn-primary').click(function () {
+
+            var std = $(this).attr('id');
+
+            var title = $(this).attr('title');
+
+
+
+            //var Id = $(this).attr('id');
+
+            $('#myModal').modal({
+
+                backdrop: 'static',
+
+                keyboard: false
+
+            })
+
+            .on('click', '#confirmok1', function (e) {
+
+                $.ajax({
+
+                    type: "POST",
+
+                    url: '@Url.Action("StudentDetails")',
+
+                    data: '{Id: ' + JSON.stringify(std) + '}',
+
+                    dataType: "json",
+
+                    contentType: "application/json; charset=utf-8",
+
+                    success: function (response) {
+
+                        window.location.reload();
+
+
+
+                        $('#myModal').modal('hide');
+
+                    },
+
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                        alert('oops, something bad happened')
+
+                    }
+
+                });
+
+            });
+
+        });
+
+
+
+        });
+
+    });
+
+    </script>
+}

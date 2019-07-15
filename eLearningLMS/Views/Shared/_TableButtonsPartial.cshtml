@@ -1,0 +1,27 @@
+﻿@model eLearningLMS.Models.SmallButtonModel
+@using eLearningLMS.Models
+<td style="width:120px">
+    <div class="btn-group" role="group">
+        @Html.Partial("_SmallButtonPartial",
+        new SmallButtonModel
+        {
+            Action = "Edit",
+            ButtonType = "btn-primary",
+            Glyph = "pencil",
+            Text = "Edit Button",
+            Id = Model.Id,
+            UserId = Model.UserId
+        })
+
+        @Html.Partial("_SmallButtonPartial",
+        new SmallButtonModel
+        {
+           Action = "Delete",
+           ButtonType = "btn-danger",
+           Glyph = "trash",
+           Text = "Delete Button",
+           Id = Model.Id,
+           UserId = Model.UserId
+        })
+    </div>
+</td>

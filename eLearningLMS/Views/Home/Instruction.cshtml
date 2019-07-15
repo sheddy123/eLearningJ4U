@@ -1,0 +1,203 @@
+﻿@model eLearningLMS.Models.SessionModel
+@using eLearningLMS.Extensions
+@{
+    ViewBag.Title = "Instruction";
+    Layout = "~/Views/Shared/_DashboardeLearning.cshtml";
+}
+
+@if (Request.IsAuthenticated && User.IsInRole("Student"))
+{
+    <!-- begin #sidebar -->
+    <div id="sidebar" class="sidebar">
+        <!-- begin sidebar scrollbar -->
+        <div data-scrollbar="true" data-height="100%">
+            <!-- begin sidebar user -->
+            <ul class="nav">
+                <li class="nav-profile">
+                    <div class="image">
+                        <a href="javascript:;">
+                            <img src="@Url.Action("UserPhotos", "Home")" alt="User Image"
+                                 style=" width: 40px; height: 40px;
+                                " />
+                        </a>
+
+                    </div>
+                    <div class="info">
+                        @User.Identity.GetUserFirstName()
+                        <span aria-label="Active now" style="background: rgb(66, 183, 42); border-radius: 50%; display: inline-block; height: 6px; width: 6px;"></span> <small>Student</small>
+                    </div>
+                </li>
+            </ul>
+            <!-- end sidebar user -->
+            <!-- begin sidebar nav -->
+            <ul class="nav">
+                <li class="nav-header">Navigation</li>
+                <li class="has-sub active">
+                    <a href="javascript:;">
+                        @*<b class="caret pull-right"></b>*@
+                        <i class="fa fa-laptop"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    @*<ul class="sub-menu">
+                <li class="active"><a href="index.html">Dashboard v1</a></li>
+                <li><a href="index_v2.html">Dashboard v2</a></li>
+            </ul>*@
+                </li>
+                <li class="has-sub">
+                    <a href="~/Enrollments/Index">
+                        <span class="badge pull-right">10</span>
+                        <i class="fa fa-inbox"></i>
+                        <span>Enrollments</span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="~/Support">
+                        @*<b class="caret pull-right"></b>*@
+                        <i class="fa fa-book"></i>
+                        <span>Download Courses<span class="label label-theme m-l-5">NEW</span></span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="~/Home/QuizIndex">
+                        @*<b class="caret pull-right"></b>*@
+                        <i class="fa fa-pencil-square-o"></i>
+                        <span>Attempt Quiz</span>
+                    </a>
+                </li>
+                <li><a href="~/Home/Calendar"><i class="fa fa-calendar"></i> <span>Calendar</span></a></li>
+                <li class="has-sub">
+                    <a href="javascript:document.getElementById('logoutForm').submit()">
+                        <b class="caret pull-right"></b>
+                        <i class="fa fa-key"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;">
+                        <b class="caret pull-right"></b>
+                        <i class="fa fa-cubes"></i>
+                        <span>Version <span class="label label-theme m-l-5">NEW</span></span>
+                    </a>
+                    @*<ul class="sub-menu">
+                <li><a href="javascript:;">HTML</a></li>
+                <li><a href="../template_content_ajax/index.html">AJAX</a></li>
+                <li><a href="../template_content_angularjs/index.html">ANGULAR JS</a></li>
+                <li><a href="../template_content_angularjs2/index.html">ANGULAR JS 2 <i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                <li><a href="../template_content_material/index.html">MATERIAL DESIGN</a></li>
+            </ul>*@
+                </li>
+
+                <!-- begin sidebar minify button -->
+                <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+                <!-- end sidebar minify button -->
+            </ul>
+            <!-- end sidebar nav -->
+        </div>
+        <!-- end sidebar scrollbar -->
+    </div>
+    <!-- begin #content -->
+    <div id="content" class="content">
+        <!-- begin breadcrumb -->
+        <ol class="breadcrumb pull-right">
+            <li><a href="javascript:;">Home</a></li>
+            <li class="active">Enrollments</li>
+
+        </ol>
+        <!-- end breadcrumb -->
+        <!-- begin page-header -->
+        <!-- end page-header -->
+        <!-- begin row -->
+        <div class="row">
+
+            <div class="col-md-10">
+                <div class="panel panel-inverse">
+                    <div class="panel-heading">
+                        <div class="panel-heading-btn">
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                        </div>
+                        <h4 class="panel-title">@User.Identity.GetUserFirstName()'s Quiz Session</h4>
+                    </div>
+                    <div class="row">
+                        <!-- begin col-12 -->
+                        <div class="col-md-12">
+                            <!-- begin panel -->
+                            <div class="panel panel-inverse" data-sortable-id="ui-general-5">
+                                <div class="panel-body">
+
+                                    <div class="container">
+                                        <br /><br />
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h2>@ViewBag.TestName</h2>
+                                                @ViewBag.TestDescription
+                                            </div>
+                                            <div class="col-md-6 semi-bold">
+                                                Test Duration : @(ViewBag.TestDuration) minutes
+                                                <br />Total Question : @ViewBag.QuestionCount
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                Before you begin, please read the following instructions carefully.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h3>How to score more?</h3>
+                                            <ul>
+                                                <li>The test is used to evaluate your expertise, creativity, productivity, knowledge and decision making technique</li>
+                                                <li>You may use resources available (like Visual Studio, etc.)</li>
+                                                <li>Do not use internet or external resources outside of this machine</li>
+                                                <li>Remember that this is a test of experience, so do not be satisfied with ONE answer on Descriptive type questions. The more the ideas, the better you score</li>
+                                                <li>Negative markings are applied on Multiple chouces qyestions. The # of score deducted is based on the percentage(s) of errors made</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h3>How to use the application?</h3>
+                                            <ul>
+                                                <li>Your answers are not tracked unless you click on the <span class="highlight"><b>Save & Next</b></span> button</li>
+                                                <li>Questions which has <b>Exercises</b> in them, use Visual Studio and write something like "completed/done/finished" etc on the description to indicate you have completed. Otherwise your answers may not be reviewed.</li>
+                                                <li>There is no <b>End</b> or <b>Submit</b> button to end the evaluation, just walk out when you are done</li>
+                                                <li>Your time starts immediately when you click the <span class="highlight"><b>Register and Start</b></span> button below</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h3>Tips</h3>
+                                            <ul>
+                                                <li>Recommend that you review all the questions before you start answering them. This will help plan your effort time</li>
+                                                <li>Answer in a way that shows that you are thinking and trying the best possible approach</li>
+                                            </ul>
+
+                                            @if (Model != null)
+                                            {
+                                                using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @id = "formRegister" }))
+                                                {
+                                                    @Html.HiddenFor(x => Model.TestId)
+                                                    @Html.HiddenFor(x => Model.UserName)
+                                                    @Html.HiddenFor(x => Model.Email)
+                                                    @Html.HiddenFor(x => Model.Phone)
+
+                                                    <a href="javascript:void(0);" onclick="getElementById('formRegister').submit();" class="btn btn-primary">Register and Start</a>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end col-10 -->
+            </div>
+            <!-- end row -->
+        </div>
+    </div>
+    <!-- end #content -->
+}

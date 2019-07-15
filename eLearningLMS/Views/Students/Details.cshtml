@@ -1,0 +1,107 @@
+﻿@model eLearningLMS.Models.Student
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaritalStat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaritalStat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genderr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genderr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Religions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Religions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nationality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nationality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StateOfOrigin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StateOfOrigin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LGA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LGA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.level)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.level)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProgrammeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProgrammeId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,265 @@
+﻿@model eLearningLMS.Models.Support
+@using eLearningLMS.Extensions
+@{
+    ViewBag.Title = "UploadFile";
+    Layout = "~/Views/Shared/_DashboardeLearning.cshtml";
+}
+@if (Request.IsAuthenticated && User.IsInRole("Instructor"))
+{
+    <!-- begin #sidebar -->
+    <div id="sidebar" class="sidebar">
+        <!-- begin sidebar scrollbar -->
+        <div data-scrollbar="true" data-height="100%">
+            <!-- begin sidebar user -->
+            <ul class="nav">
+                <li class="nav-profile">
+                    <div class="image">
+                        <a href="javascript:;">
+                            <img src="@Url.Action("UserPhotos", "Home")" alt="User Image"
+                                 style=" width: 40px; height: 40px;
+                                " />
+                        </a>
+
+                    </div>
+                    <div class="info">
+                        @User.Identity.GetUserFirstName()
+                        <span aria-label="Active now" style="background: rgb(66, 183, 42); border-radius: 50%; display: inline-block; height: 6px; width: 6px;"></span> <small>Student</small>
+                    </div>
+                </li>
+            </ul>
+            <!-- end sidebar user -->
+            <!-- begin sidebar nav -->
+            <ul class="nav">
+                <li class="nav-header">Navigation</li>
+                <li class="has-sub active">
+                    <a href="javascript:;">
+                        @*<b class="caret pull-right"></b>*@
+                        <i class="fa fa-laptop"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    @*<ul class="sub-menu">
+                            <li class="active"><a href="index.html">Dashboard v1</a></li>
+                            <li><a href="index_v2.html">Dashboard v2</a></li>
+                        </ul>*@
+                </li>
+                <li class="has-sub">
+                    <a href="~/Instructors/Index">
+                        <span class="badge pull-right">10</span>
+                        <i class="fa fa-user"></i>
+                        <span>Instructor</span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="~/Support/UploadFile">
+
+                        <i class="fa fa-upload"></i>
+                        <span>Upload Course</span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="~/Home/Email">
+                        <i class="fa fa-inbox"></i>
+                        <span>Send Email</span>
+                    </a>
+                </li>
+                <li><a href="~/Home/Calendar"><i class="fa fa-calendar"></i> <span>Calendar</span></a></li>
+
+                <li class="has-sub">
+                    <a href="~/Account/Login">
+                        @*<b class="caret pull-right"></b>*@
+                        <i class="fa fa-key"></i>
+                        <span>Login</span>
+                    </a>
+
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;">
+                        @*<b class="caret pull-right"></b>*@
+                        <i class="fa fa-cubes"></i>
+                        <span>Version <span class="label label-theme m-l-5">NEW</span></span>
+                    </a>
+
+                </li>
+
+                <!-- begin sidebar minify button -->
+                <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+                <!-- end sidebar minify button -->
+            </ul>
+            <!-- end sidebar nav -->
+        </div>
+        <!-- end sidebar scrollbar -->
+    </div>
+    <!-- begin #content -->
+    <div id="content" class="content">
+        <!-- begin breadcrumb -->
+        <ol class="breadcrumb pull-right">
+            <li><a href="javascript:;">Home</a></li>
+            <li class="active">Enrollments</li>
+
+        </ol>
+        <!-- end breadcrumb -->
+        <!-- begin page-header -->
+        <!-- end page-header -->
+        <!-- begin row -->
+        <div class="row">
+            <div class="col-md-10">
+                <div class="panel panel-inverse">
+                    <div class="panel-heading">
+                        <div class="panel-heading-btn">
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                        </div>
+                        <h4 class="panel-title">@User.Identity.GetUserFirstName()'s CourseWare Upload</h4>
+                    </div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("UploadFile", "Support", null, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Course Title</label>
+                                <div class="col-md-4">
+                                    @Html.TextAreaFor(model => model.Summary, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Course Code</label>
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(m => m.CoursesId, ViewBag.CourseId as SelectList,@*"--Select Instructor--",*@                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    /**/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               /**/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               /**/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               /**/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               /**/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               /**/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               /**/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               /**/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               /**/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               /**/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               /**/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               /**/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               /**/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               /**/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CoursesId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Files:</label>
+                                <div class="col-md-4">
+                                    <i class="fa fa-plus"></i>
+                                    <span>Add files...</span>
+                                    <input type="file" name="file" multiple="multiple" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"></label>
+                                <div class="col-md-4">
+                                    <div>
+                                        <input type="submit" class="btn btn-sm btn-success" value="Create" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="panel panel-inverse">
+                    <div class="panel-heading">
+                        <div class="panel-heading-btn">
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                        </div>
+                        <h4 class="panel-title">Courses Uploaded</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <table id="upload" class="table  table-striped table-bordered nowrap" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            File Name
+                                        </th>
+                                        <th>Date Posted</th>
+                                        <th>Delete File</th>
+                                    </tr>
+                                </thead>
+                                @foreach (var items in ViewBag.Details)
+                                {
+
+                                    <tbody>
+                                        <tr>
+
+                                            @foreach (var item in ViewBag.Details)
+                                            {
+                                                if (@item.SupportId == @items.SupportId)
+                                                {
+                                                    <td>@item.FileName</td>
+                                                    <td>@item.dateUploaded</td>
+                                                    <td><a href="javascript:void(0);" data-id="@item.Id" class="deleteItem btn btn-danger btn-sm active">Delete</a></td>
+                                                }
+                                            }
+
+                                        </tr>
+                                    </tbody>
+                                }
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end col-10 -->
+    </div>
+    <!-- end row -->
+
+    <!-- end #content -->
+}
+
+
+@section Scripts {
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#upload").DataTable();
+            $('.deleteItem').click(function (e) {
+
+                e.preventDefault();
+                var $ctrl = $(this);
+                if (confirm('Do you really want to delete this file?')) {
+                    $.ajax({
+                        url: '@Url.Action("DeleteFile")',
+                        type: 'POST',
+                        data: { id: $(this).data('id') }
+                    }).done(function (data) {
+                        if (data.Result == "OK") {
+                            $ctrl.closest('tbody').remove();
+                            $ctrl.closest('tr').remove();
+                            $ctrl.closest('td').remove();
+                        }
+                        else if (data.Result.Message) {
+                            alert(data.Result.Message);
+                        }
+                    }).fail(function () {
+                        alert("There is something wrong. Please try again.");
+                    })
+
+                }
+            });
+        });
+
+    </script>
+    @*<script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
+}
+
